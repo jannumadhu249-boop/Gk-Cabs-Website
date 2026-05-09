@@ -122,9 +122,7 @@ function Contact() {
 
   // Derived data
   const heroImage = contactData?.image ? `${IMAGE_BASE}/${contactData.image}` : null;
-  const mapEmbedUrl = `https://maps.google.com/maps?width=600&height=400&hl=en&q=Katedan,Ranga+Reddy+District,Telangana-500077&t=&z=12&ie=UTF8&iwloc=B&output=embed?q=${encodeURIComponent(
-    contactData?.addressLineOne || 'Katedan, Ranga Reddy District, Telangana-500077'
-  )}&t=&z=12&ie=UTF8&iwloc=B&output=embed`;
+  const mapEmbedUrl = `${contactData?.map || ''}`;
 
   return (
     <>

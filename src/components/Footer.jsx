@@ -24,10 +24,10 @@ function Footer() {
   // Fallback to original hardcoded values if API hasn't loaded or fails
   const address =
     contactData?.addressLineOne ||
-    'Gk Cabs Administrative Office Head Office H.No.4-207/1, Sri Ram Colony Bus Stop, Katedan, Near Jalpally, Ranga Reddy District, Telangana-500077';
-  const phone = contactData?.phoneOne || '+91 98666 10415';
-  const email = contactData?.emailOne || 'info@gkcabs.com';
-  const copyrightText = contactData?.copyRightText || '© 2026 Gk Cabs. All rights reserved.';
+    '';
+  const phone = contactData?.phoneTwo || '';
+  const email = contactData?.emailOne || '';
+  const copyrightText = contactData?.copyRightText || '';
 
   const socialLinks = contactData
     ? {

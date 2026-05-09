@@ -122,8 +122,8 @@ function Home() {
             <div className="col-xl-6 col-lg-6">
               <div className="home-content" data-aos="fade-right">
                 <div>
-                  <h5 className="mb-3">Taxi Booking Service</h5>
-                  <h1 className="fw-bold mb-3 display-5"><span>Gk Cabs</span> - Premium Taxi Booking Solution</h1>
+                  <h5 className="mb-3">{homepage.mainName}</h5>
+                  <h1 className="fw-bold mb-3 display-5"><span>{homepage.heroSubTitle}</span>{homepage.subTitle}</h1>
                   <div className="text-muted mb-4 lead" dangerouslySetInnerHTML={{ __html: homepage.mainDecription }} />
                   <div className="button-part d-flex gap-3 align-items-center">
                     <h6 className="mb-0 fw-bold border-0 p-0 text-dark">Click To View :</h6>
@@ -209,13 +209,13 @@ function Home() {
                 <div className="service-card p-4 rounded-4 h-100 text-center border-0 shadow-sm bg-white">
                   <div className="service-icon mb-4 mx-auto d-flex align-items-center justify-content-center bg-primary bg-opacity-10 rounded-circle" style={{ width: '80px', height: '80px' }}>
                     {service.image ? (
-                      <img src={`${imageBaseUrl}${service.image}`} alt={service.name} width="45" height="45" style={{ objectFit: 'contain' }} />
+                      <img src={`${imageBaseUrl}${service.image}`} alt={service.name} style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
                     ) : (
                       <Icon name="car" size={35} className="text-primary" />
                     )}
                   </div>
                   <h5 className="fw-bold">{service.name}</h5>
-                  <div className="text-muted small" dangerouslySetInnerHTML={{ __html: service.description || '<p>Reliable transportation for your needs.</p>' }} />
+                  <div className="text-muted small" dangerouslySetInnerHTML={{ __html: service.description || "" }} />
                 </div>
               </div>
             ))}
@@ -325,7 +325,7 @@ function Home() {
         <div className="container">
           <div className="py-5">
             <div className="title text-center mb-4">
-              <h3>Popular Routes in States</h3>
+              <h3>Popular States Taxi Services</h3>
               <p>Reliable and affordable taxi services for popular routes across Telangana and neighboring states.
                  Whether you're traveling for pilgrimage, tourism, or business, we've got you covered.</p>
             </div>
@@ -347,7 +347,7 @@ function Home() {
 
           <div className="py-5">
             <div className="title text-center mb-4">
-              <h3>Popular Routes in Districts</h3>
+              <h3>Popular Districts Taxi Services</h3>
               <p>Reliable and affordable taxi services for popular routes across Telangana districts.
                 Whether you're traveling for pilgrimage, tourism, or business, we've got you covered.</p>
             </div>
@@ -369,7 +369,7 @@ function Home() {
 
           <div className='py-5'>
             <div className="title text-center mb-4">
-              <h3>Popular Routes in Cities</h3>
+              <h3>Popular Cities Taxi Services</h3>
               <p>Reliable and affordable taxi services for popular routes across Telangana cities.
                 Whether you're traveling for pilgrimage, tourism, or business, we've got you covered.</p>
             </div>
