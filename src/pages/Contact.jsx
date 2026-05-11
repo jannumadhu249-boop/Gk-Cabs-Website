@@ -155,7 +155,7 @@ function Contact() {
       </section>
 
       {/* Contact Info Cards */}
-      <section className="contact-info-section">
+      {/* <section className="contact-info-section">
         <div className="container">
           <div className="row g-4 justify-content-center">
             <div className="col-lg-4 col-md-6">
@@ -163,7 +163,7 @@ function Contact() {
                 <div className="icon-box">
                   <Icon name="location" size={28} />
                 </div>
-                <h4>Our Office</h4>
+                <h4>Head Office</h4>
                 <p>{contactData?.addressLineOne || 'Not available'}</p>
                 {contactData?.addressLineTwo && (
                   <p className="text-muted">{contactData.addressLineTwo}</p>
@@ -206,6 +206,111 @@ function Contact() {
                 )}
               </div>
             </div>
+          </div>
+        </div>
+      </section> */}
+
+      <section className="contact-info-section">
+        <div className="container">
+          <div className="row g-4 justify-content-center">
+
+            {/* Address Card */}
+            {(contactData?.addressLineOne || contactData?.addressLineTwo) && (
+              <div className="col-lg-4 col-md-6">
+                <div
+                  className="contact-card"
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                >
+                  <div className="icon-box">
+                    <Icon name="location" size={28} />
+                  </div>
+
+                  <h4>
+                    {contactData?.addressLineTwo
+                      ? "Head Office & Branch Office"
+                      : "Head Office"}
+                  </h4>
+
+                  {contactData?.addressLineOne && (
+                    <p>{contactData.addressLineOne}</p>
+                  )}
+
+                  {contactData?.addressLineTwo && (
+                    <p className="text-muted">
+                      {contactData.addressLineTwo}
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Phone Card */}
+            {(contactData?.phoneOne || contactData?.phoneTwo) && (
+              <div className="col-lg-4 col-md-6">
+                <div
+                  className="contact-card"
+                  data-aos="fade-up"
+                  data-aos-delay="200"
+                >
+                  <div className="icon-box">
+                    <Icon name="phone" size={28} />
+                  </div>
+
+                  <h4>Phone Numbers</h4>
+
+                  {contactData?.phoneOne && (
+                    <p>
+                      <a href={`tel:${contactData.phoneOne}`}>
+                        {contactData.phoneOne}
+                      </a>
+                    </p>
+                  )}
+
+                  {contactData?.phoneTwo && (
+                    <p>
+                      <a href={`tel:${contactData.phoneTwo}`}>
+                        {contactData.phoneTwo}
+                      </a>
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Email Card */}
+            {(contactData?.emailOne || contactData?.emailTwo) && (
+              <div className="col-lg-4 col-md-6">
+                <div
+                  className="contact-card"
+                  data-aos="fade-up"
+                  data-aos-delay="300"
+                >
+                  <div className="icon-box">
+                    <Icon name="direct-notification" size={28} />
+                  </div>
+
+                  <h4>Email Addresses</h4>
+
+                  {contactData?.emailOne && (
+                    <p>
+                      <a href={`mailto:${contactData.emailOne}`}>
+                        {contactData.emailOne}
+                      </a>
+                    </p>
+                  )}
+
+                  {contactData?.emailTwo && (
+                    <p>
+                      <a href={`mailto:${contactData.emailTwo}`}>
+                        {contactData.emailTwo}
+                      </a>
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+
           </div>
         </div>
       </section>

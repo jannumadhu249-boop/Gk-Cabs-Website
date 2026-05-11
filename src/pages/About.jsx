@@ -119,8 +119,8 @@ function About() {
             <div className="col-xl-6 col-lg-6">
               <div className="home-content" data-aos="fade-right">
                 <div>
-                  <h5 className="mb-3">Taxi Booking Service</h5>
-                  <h1 className="fw-bold mb-3 display-5"><span>Gk Cabs</span> - Premium Taxi Booking Solution</h1>
+                  <h5 className="mb-3">{homepage.mainName}</h5>
+                  <h1 className="fw-bold mb-3 display-5"><span>{homepage.heroSubTitle}</span>{homepage.subTitle}</h1>
                   {homepage && (
                     <div className="text-muted mb-4 lead" dangerouslySetInnerHTML={{ __html: homepage.mainDecription }} />
                   )}
