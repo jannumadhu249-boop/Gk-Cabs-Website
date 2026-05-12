@@ -215,7 +215,32 @@ function Contact() {
           <div className="row g-4 justify-content-center">
 
             {/* Address Card */}
-            {(contactData?.addressLineOne || contactData?.addressLineTwo) && (
+            {( contactData?.addressLineOne ) && (
+              <div className="col-lg-4 col-md-6">
+                <div
+                  className="contact-card"
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                >
+                  <div className="icon-box">
+                    <Icon name="location" size={28} />
+                  </div>
+
+                  <h4>
+                    {contactData?.addressLineOne
+                      ? "Head Office"
+                      : ""}
+                  </h4>
+
+                  {contactData?.addressLineOne && (
+                    <p>{contactData.addressLineOne}</p>
+                  )}
+
+                </div>
+              </div>
+            )}
+
+            {( contactData?.addressLineTwo ) && (
               <div className="col-lg-4 col-md-6">
                 <div
                   className="contact-card"
@@ -228,13 +253,8 @@ function Contact() {
 
                   <h4>
                     {contactData?.addressLineTwo
-                      ? "Head Office & Branch Office"
-                      : "Head Office"}
+                      ? "Branch Office" : ""}
                   </h4>
-
-                  {contactData?.addressLineOne && (
-                    <p>{contactData.addressLineOne}</p>
-                  )}
 
                   {contactData?.addressLineTwo && (
                     <p className="text-muted">

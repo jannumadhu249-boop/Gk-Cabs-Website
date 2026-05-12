@@ -165,20 +165,26 @@ function Footer() {
 
           <div className="col-lg-3 col-md-6 footer-col">
             <h4>Contact Us</h4>
-            <ul className="footer-contact-info">
-              <li>
-                <Icon name="location" size={48} className="iconsax" />
-                <span>{address}</span>
-              </li>
-              <li>
-                <Icon name="phone" size={20} className="iconsax" />
-                <a href={`tel:${phone.replace(/\s/g, '')}`}>{phone}</a>
-              </li>
-              <li>
-                <Icon name="direct-notification" size={20} className="iconsax" />
-                <a href={`mailto:${email}`}>{email}</a>
-              </li>
-            </ul>
+              <ul className="footer-contact-info">
+                {address && (
+                  <li>
+                    <Icon name="location" size={48} className="iconsax" />
+                    <span>{address}</span>
+                  </li>
+                )}
+                {phone && (
+                  <li>
+                    <Icon name="phone" size={20} className="iconsax" />
+                    <a href={`tel:${phone.replace(/\s/g, '')}`}>{phone}</a>
+                  </li>
+                )}
+                {email && (
+                  <li>
+                    <Icon name="direct-notification" size={20} className="iconsax" />
+                    <a href={`mailto:${email}`}>{email}</a>
+                  </li>
+                )}
+              </ul>
           </div>
         </div>
 
