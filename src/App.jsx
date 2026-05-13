@@ -14,6 +14,10 @@ import Hyderabad from './pages/Districts/Hyderbad';
 import Warangal from './pages/Cities/Warangal';
 import LocationPage from './pages/LocationPage';
 
+import Safety from './pages/Safety';
+import Careers from './pages/Careers';
+import Media from './pages/Media';
+
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -34,6 +38,9 @@ function AppLayout() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/safety" element={<Safety />} />
+        <Route path="/careers" element={<Careers />} />
+        <Route path="/media" element={<Media />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/terms-conditions" element={<TermsConditions />} />

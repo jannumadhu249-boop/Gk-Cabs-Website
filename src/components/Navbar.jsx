@@ -52,6 +52,15 @@ function Navbar() {
               <li className="nav-item">
                 <Link className={isActive('/contact')} to="/contact" onClick={() => setCollapsed(true)}>Contact Us</Link>
               </li>
+              <li className="nav-item">
+                <Link className={isActive('/safety')} to="/safety" onClick={() => setCollapsed(true)}>Safety</Link>
+              </li>
+              {/* <li className="nav-item">
+                <Link className={isActive('/careers')} to="/careers" onClick={() => setCollapsed(true)}>Careers</Link>
+              </li> */}
+              <li className="nav-item">
+                <Link className={isActive('/media')} to="/media" onClick={() => setCollapsed(true)}>Media</Link>
+              </li>
             </ul>
           </div>
         </nav>

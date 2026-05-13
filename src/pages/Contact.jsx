@@ -49,7 +49,7 @@ function Contact() {
   useEffect(() => {
     if (contactData) {
       document.title = "Contact Us - Gk Cabs";
-      
+
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
         metaDesc.setAttribute('content', "Get in touch with Gk Cabs for any queries, bookings, or support. We are available 24/7 to assist you.");
@@ -57,7 +57,7 @@ function Contact() {
 
       const metaKeywords = document.querySelector('meta[name="keywords"]');
       if (metaKeywords) {
-        metaKeywords.setAttribute('content', "contact Gk Cabs, taxi support, cab booking help, customer service");
+        metaKeywords.setAttribute('content', "contact Gk Cabs, taxi support, cab booking help, Riders service");
       }
     }
   }, [contactData]);
@@ -215,7 +215,7 @@ function Contact() {
           <div className="row g-4 justify-content-center">
 
             {/* Address Card */}
-            {( contactData?.addressLineOne ) && (
+            {(contactData?.addressLineOne) && (
               <div className="col-lg-4 col-md-6">
                 <div
                   className="contact-card"
@@ -240,7 +240,7 @@ function Contact() {
               </div>
             )}
 
-            {( contactData?.addressLineTwo ) && (
+            {(contactData?.addressLineTwo) && (
               <div className="col-lg-4 col-md-6">
                 <div
                   className="contact-card"
