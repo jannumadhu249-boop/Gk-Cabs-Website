@@ -293,7 +293,9 @@ header {
   width: 100%;
   padding-block: calc(10px + (100vw - 320px) / 1600);
   z-index: 10;
+  position: sticky;
   transition: background-color 0.3s ease;
+  background-color: rgba(var(--white), 0.95);
 }
 
 @media (max-width: 1600px) {
@@ -363,7 +365,7 @@ header.sticky .navbar-nav .nav-item .nav-link:hover {
 }
 
 .navbar .logo {
-  height: calc(60px + (100vw - 320px) / 1600);
+  height: calc(80px + (100vw - 320px) / 1600);
 }
 
 .navbar .navbar-toggler {
