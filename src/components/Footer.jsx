@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from './Icon';
-
-const API_URL = 'http://88.222.213.67:5090/v1/gkcabs/web/get-contactus';
+import { API_ENDPOINTS } from '../config/api';
 
 function Footer() {
   const [contactData, setContactData] = useState(null);
 
   useEffect(() => {
-    fetch(API_URL, {
+    fetch(API_ENDPOINTS.CONTACT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     })

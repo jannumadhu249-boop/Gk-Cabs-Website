@@ -1,16 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../components/Icon';
-
-const imageBaseUrl = 'http://88.222.213.67:5090/';
+import { API_ENDPOINTS, BASE_URL } from '../config/api';
 
 function Home() {
   const [homeData, setHomeData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('user');
+  const imageBaseUrl = BASE_URL;
 
   useEffect(() => {
-    fetch('http://88.222.213.67:5090/v1/gkcabs/web/get-home-screen', {
+    fetch(API_ENDPOINTS.HOME_SCREEN, {
       method: 'POST'
     })
       .then(res => res.json())

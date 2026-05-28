@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
-const ABOUT_API_URL = 'http://88.222.213.67:5090/v1/gkcabs/web/get-about-us';
-const HOME_API_URL = 'http://88.222.213.67:5090/v1/gkcabs/web/get-home-screen';
-const IMAGE_BASE = 'http://88.222.213.67:5090';
+import { API_ENDPOINTS, BASE_URL } from '../config/api';
 
 function About() {
   const [aboutUs, setAboutUs] = useState(null);
@@ -15,11 +12,11 @@ function About() {
     const fetchData = async () => {
       try {
         const [aboutRes, homeRes] = await Promise.all([
-          fetch(ABOUT_API_URL, {
+          fetch(API_ENDPOINTS.ABOUT_US, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
           }),
-          fetch(HOME_API_URL, {
+          fetch(API_ENDPOINTS.HOME_SCREEN, {
             method: 'POST',
           })
         ]);
@@ -108,7 +105,7 @@ function About() {
   }
 
   const { homepage, contactus } = homeData || {};
-  const imageBaseUrl = `${IMAGE_BASE}/`;
+  const imageBaseUrl = `${BASE_URL}`;
 
   return (
     <>

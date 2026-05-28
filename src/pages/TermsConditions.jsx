@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
-const API_URL = 'http://88.222.213.67:5090/v1/gkcabs/web/get-home-screen';
-const IMAGE_BASE = 'http://88.222.213.67:5090';
+import { API_ENDPOINTS, BASE_URL } from '../config/api';
 
 function TermsConditions() {
   const [pageData, setPageData] = useState(null);
@@ -12,7 +10,7 @@ function TermsConditions() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(API_URL, {
+        const res = await fetch(API_ENDPOINTS.HOME_SCREEN, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
         });
@@ -64,7 +62,7 @@ function TermsConditions() {
   }
 
   const heroImage = pageData?.homepageImage
-    ? `${IMAGE_BASE}/${pageData.homepageImage}`
+    ? `${BASE_URL}${pageData.homepageImage}`
     : null;
   const policyText = pageData?.policies?.termsAndCondition || '';
   const policyHtml = policyText.replace(/\n/g, '<br>');

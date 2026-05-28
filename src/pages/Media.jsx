@@ -72,9 +72,7 @@
 
 import { useState, useEffect } from 'react';
 import './Media.css';
-
-const API_BASE = 'http://88.222.213.67:5090';
-const GALLERY_URL = `${API_BASE}/v1/gkcabs/web/getallgallery`;
+import { API_ENDPOINTS, BASE_URL } from '../config/api';
 
 const Media = () => {
   const [galleryImages, setGalleryImages] = useState([]);
@@ -85,7 +83,7 @@ const Media = () => {
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        const response = await fetch(GALLERY_URL, { method: 'POST' });
+        const response = await fetch(API_ENDPOINTS.GALLERY, { method: 'POST' });
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -96,7 +94,7 @@ const Media = () => {
             .filter(item => item.status === 'active')
             .map(item => ({
               id: item._id,
-              src: `${API_BASE}/${item.image}`,
+              src: `${BASE_URL}${item.image}`,
               title: item.title || 'Untitled', // fallback if title missing
             }));
           setGalleryImages(activeImages);

@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../components/Icon';
-
-const CONTACT_API = 'http://88.222.213.67:5090/v1/gkcabs/web/get-contactus';
-const ENQUIRY_API = 'http://88.222.213.67:5090/v1/gkcabs/web/enquiry/addenquiry';
-const IMAGE_BASE = 'http://88.222.213.67:5090';
+import { API_ENDPOINTS, BASE_URL } from '../config/api';
 
 function Contact() {
   // Contact data state
@@ -26,7 +23,7 @@ function Contact() {
   useEffect(() => {
     const fetchContact = async () => {
       try {
-        const res = await fetch(CONTACT_API, {
+        const res = await fetch(API_ENDPOINTS.CONTACT, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
         });
@@ -80,7 +77,7 @@ function Contact() {
         description: formData.message, // map "message" to "description"
       };
 
-      const res = await fetch(ENQUIRY_API, {
+      const res = await fetch(API_ENDPOINTS.ENQUIRY, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -121,7 +118,7 @@ function Contact() {
   }
 
   // Derived data
-  const heroImage = contactData?.image ? `${IMAGE_BASE}/${contactData.image}` : null;
+  const heroImage = contactData?.image ? `${BASE_URL}${contactData.image}` : null;
   const mapEmbedUrl = `${contactData?.map || ''}`;
 
   return (

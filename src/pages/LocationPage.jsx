@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
 import Icon from '../components/Icon';
-
-const API_URL = 'http://88.222.213.67:5090/v1/gkcabs/web/get-home-screen';
+import { API_ENDPOINTS, BASE_URL } from '../config/api';
 
 function LocationPage({ type: propType, slugOverride }) {
   const { slug: urlSlug } = useParams();
@@ -17,7 +16,7 @@ function LocationPage({ type: propType, slugOverride }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(API_URL, {
+    fetch(API_ENDPOINTS.HOME_SCREEN, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({}),
@@ -98,7 +97,7 @@ const found = allLocations.find(item => item.slug === slug);
   }
 
   const { homepage, contactus } = homeData || {};
-  const imageBaseUrl = 'http://88.222.213.67:5090/';
+  const imageBaseUrl = BASE_URL;
 
   return (
     <>
