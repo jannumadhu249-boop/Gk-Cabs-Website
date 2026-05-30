@@ -44,16 +44,16 @@ const found = allLocations.find(item => item.slug === slug);
 
   useEffect(() => {
     if (location) {
-      document.title = location.metaTitle || `${location.name} - Gk Cabs`;
+      document.title = location.metaTitle || `${location.name}`;
       
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
-        metaDesc.setAttribute('content', location.metaDescription || `Premium cab services in ${location.name}. Book your ride now with Gk Cabs.`);
+        metaDesc.setAttribute('content', location.metaDescription || `${location.name}`);
       }
 
       const metaKeywords = document.querySelector('meta[name="keywords"]');
       if (metaKeywords) {
-        metaKeywords.setAttribute('content', location.metaKeyWords || `Gk Cabs, taxi booking, cab service, ${location.name}`);
+        metaKeywords.setAttribute('content', location.metaKeyWords || `${location.name}`);
       }
     }
   }, [location]);

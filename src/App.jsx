@@ -48,10 +48,10 @@ function AppLayout() {
         <Route path="/:slug" element={<LocationPage type="district" />} />
         <Route path="/:slug" element={<LocationPage type="city" />} />
 
-        {/* Support for legacy special URLs handled by dynamic page */}
+        {/* Support for legacy special URLs handled by dynamic page
         <Route path="/cab-service-in-telangana" element={<LocationPage type="state" slugOverride="telangana" />} />
         <Route path="/cab-service-in-hyderabad" element={<LocationPage type="district" slugOverride="hyderabad" />} />
-        <Route path="/cab-service-in-warangal" element={<LocationPage type="city" slugOverride="warangal" />} />
+        <Route path="/cab-service-in-warangal" element={<LocationPage type="city" slugOverride="warangal" />} /> */}
 
       </Routes>
       <Footer />

@@ -623,13 +623,13 @@ const Safety = () => {
 
     const renderMeasuresSection = () => {
         const {
-            title1 = 'Measures to ensure the well-being of both, our Drivers and Riders.',
-            title2 = 'Insurance',
-            title3 = '24 x 7 Riders Support',
-            title4 = 'Two-way Rating System',
-            description2 = 'Insurance can be claimed for any accident...',
-            description3 = 'Both, our drivers and riders can report any kind of issues...',
-            description4 = "Post the ride, both parties can give a rating to each other and any rating below 3 is flagged from Gk Cabs's end.",
+            title1,
+            title2,
+            title3,
+            title4,
+            description1,
+            description2,
+            description3,
             image1,
             image2,
             image3,
@@ -668,7 +668,7 @@ const Safety = () => {
                                         <Icon name="wallet-money" size={32} color="black" className="mb-2" />
                                     )}
                                     <h4 className="fw-bold h5">{title2}</h4>
-                                    <p className="small text-dark opacity-75">{description2}</p>
+                                    <p className="small text-dark opacity-75">{description1}</p>
                                 </div>
                             </div>
                             {/* Measure 2 */}
@@ -684,7 +684,7 @@ const Safety = () => {
                                         <Icon name="phone" size={32} color="black" className="mb-2" />
                                     )}
                                     <h4 className="fw-bold h5">{title3}</h4>
-                                    <p className="small text-dark opacity-75">{description3}</p>
+                                    <p className="small text-dark opacity-75">{description2}</p>
                                 </div>
                             </div>
                             {/* Measure 3 */}
@@ -700,7 +700,7 @@ const Safety = () => {
                                         <Icon name="star" size={32} color="black" className="mb-2" />
                                     )}
                                     <h4 className="fw-bold h5">{title4}</h4>
-                                    <p className="small text-dark opacity-75">{description4}</p>
+                                    <p className="small text-dark opacity-75">{description3}</p>
                                 </div>
                             </div>
                         </div>
