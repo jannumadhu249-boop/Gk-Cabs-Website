@@ -1890,3 +1890,8 @@ background-image: url('../images/background/home-bg.png');
     white-space: nowrap;
   }
 }
+
+.highlight-number {
+  font-weight: bold;
+  color: #007bff; /* or any highlight color you prefer */
+}
