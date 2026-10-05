@@ -4,7 +4,6 @@ import { API_ENDPOINTS, BASE_URL } from '../config/api';
 
 function About() {
   const [aboutUs, setAboutUs] = useState(null);
-  const [homeData, setHomeData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
