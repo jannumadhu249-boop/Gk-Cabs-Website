@@ -867,11 +867,23 @@ header.sticky .navbar-nav .nav-item .nav-link:hover {
 ****************************/
 .inner-page-wrapper {
   background-color: rgba(var(--box-bg), 1);
+  position: relative;
+  z-index: 1;
 }
 
 .inner-page-wrapper .inner-page-img {
   margin-top: calc(20px + 50 * (100vw - 320px) / 1600);
   padding-inline: calc(20px + 40 * (100vw - 320px) / 1600);
+}
+
+.inner-page-wrapper .inner-page-card {
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.inner-page-wrapper .inner-page-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 /***************************
@@ -1326,7 +1338,7 @@ header.sticky .navbar-nav .nav-item .nav-link:hover {
   padding: calc(100px + 80 * (100vw - 320px) / 1600) 0;
   color: white;
   text-align: center;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1537,7 +1549,7 @@ header.sticky .navbar-nav .nav-item .nav-link:hover {
   /* Reduced height */
   color: white;
   text-align: center;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1894,4 +1906,138 @@ background-image: url('../images/background/home-bg.png');
 .highlight-number {
   font-weight: bold;
   color: #007bff; /* or any highlight color you prefer */
+}
+
+/* Fix section overlapping issues */
+section {
+  position: relative;
+  isolation: isolate;
+}
+
+.home-page-container {
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+.home-page-container section {
+  clear: both;
+  overflow: visible;
+  min-height: fit-content;
+}
+
+/* Ensure proper stacking for effect images */
+.effect1, .effect2, .effect3, .effect4 {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Fix tab navigation centering */
+.screenshots-tab {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Ensure sections expand to content */
+.section-b-space {
+  min-height: auto;
+  height: auto;
+}
+
+/* Prevent content clipping in containers */
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Swiper visibility fix */
+.swiper {
+  overflow: visible !important;
+}
+
+.swiper-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+/* Content sections should show all content */
+.content-section {
+  overflow: visible;
+  min-height: fit-content;
+}
+
+.content-section .container {
+  overflow: visible;
+}
+
+.about-content {
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+/* Fix policy pages content display */
+.section-t-space {
+  padding-top: calc(40px + 40 * (100vw - 320px) / 1600);
+}
+
+/* Ensure hero sections don't clip breadcrumbs */
+.breadcrumb-navbar {
+  position: relative;
+  z-index: 2;
+}
+
+/* Map section should expand to content */
+.map-section {
+  overflow: visible;
+  height: auto;
+}
+
+.map-container iframe {
+  display: block;
+  width: 100%;
+  height: 450px;
+  border: 0;
+}
+
+/* Contact form wrapper */
+.contact-form-wrapper {
+  overflow: visible;
+}
+
+/* Contact Number with Phone Icon */
+.contact-number {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  color: rgba(var(--title-color), 1) !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.contact-number:hover {
+  color: rgba(var(--theme-color), 1) !important;
+}
+
+.contact-number .icon-svg {
+  color: rgba(var(--theme-color), 1) !important;
+  flex-shrink: 0;
+}
+
+.contact-number .icon-svg svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+}
+
+.contact-number .highlight-number {
+  font-size: calc(14px + 2 * (100vw - 320px) / 1600);
+  white-space: nowrap;
+}
+
+@media (max-width: 575px) {
+  .contact-number .highlight-number {
+    font-size: 13px;
+  }
 }

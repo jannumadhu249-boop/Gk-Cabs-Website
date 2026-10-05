@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useParams, useLocation, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Icon from '../components/Icon';
+import MobileAppSchema from '../components/MobileAppSchema';
 import { API_ENDPOINTS, BASE_URL } from '../config/api';
+import './LocationPage.css';
 
 function LocationPage({ type: propType, slugOverride }) {
   const { slug: urlSlug } = useParams();
@@ -59,12 +61,13 @@ const found = allLocations.find(item => item.slug === slug);
   }, [location]);
 
   useEffect(() => {
-    if (homeData) {
+    if (homeData && homeData.homepage) {
       const timer = setTimeout(() => {
         const heroSwiperConfig = {
           slidesPerView: 1,
           loop: true,
           autoplay: { delay: 2000, disableOnInteraction: false },
+          lazy: true,
         };
 
         if (document.querySelector('#heroUserSlider')) {
@@ -100,7 +103,8 @@ const found = allLocations.find(item => item.slug === slug);
   const imageBaseUrl = BASE_URL;
 
   return (
-    <>
+    <div className="location-page">
+      <MobileAppSchema />
       {/* ── Hero Section (Replaces Breadcrumb) ── */}
       <section className="home-wrapper" id="home">
         <div className="container">
@@ -132,7 +136,12 @@ const found = allLocations.find(item => item.slug === slug);
                     <div className="swiper-wrapper">
                       {homepage?.userAppImages?.map((img, i) => (
                         <div className="swiper-slide" key={i}>
-                          <img src={`${imageBaseUrl}${img}`} className="screen-img" alt="User App" />
+                          <img 
+                            src={`${imageBaseUrl}${img}`} 
+                            className="screen-img" 
+                            alt="User App"
+                            loading="lazy"
+                          />
                         </div>
                       ))}
                     </div>
@@ -145,7 +154,12 @@ const found = allLocations.find(item => item.slug === slug);
                     <div className="swiper-wrapper">
                       {homepage?.driverAppImages?.map((img, i) => (
                         <div className="swiper-slide" key={i}>
-                          <img src={`${imageBaseUrl}${img}`} className="screen-img" alt="Driver App" />
+                          <img 
+                            src={`${imageBaseUrl}${img}`} 
+                            className="screen-img" 
+                            alt="Driver App"
+                            loading="lazy"
+                          />
                         </div>
                       ))}
                     </div>
@@ -172,7 +186,7 @@ const found = allLocations.find(item => item.slug === slug);
           )}
         </div>
       </section>
-    </>
+    </div>
   );
 }
 

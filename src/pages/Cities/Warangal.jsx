@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../../components/Icon';
+import MobileAppSchema from '../../components/MobileAppSchema';
 
 const routes = [
   'Telangana', 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar',
@@ -46,10 +47,9 @@ function Warangal() {
     });
   }, []);
 
-  const cardColors = ['#FFF5F5', '#F5FAFF', '#FFFBF0', '#F5FFF5', '#FCF5FF', '#FFFFF0'];
-
   return (
     <div className="state-page-wrapper">
+      <MobileAppSchema />
       {/* ── Breadcrumb Section ── */}
       <section className="contact-hero">
         <div className="container" data-aos="fade-up">

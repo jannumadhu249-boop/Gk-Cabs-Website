@@ -1,0 +1,237 @@
+/* LocationPage Specific Styles */
+
+/* Hero Section - Prevent content cutting */
+.location-page .home-wrapper {
+  height: auto !important;
+  min-height: 700px !important;
+  overflow: visible !important;
+  padding-bottom: 50px !important;
+}
+
+.location-page .home-wrapper .container {
+  overflow: visible !important;
+}
+
+.location-page .home-wrapper .row {
+  overflow: visible !important;
+}
+
+/* Home Content - Allow full content display */
+.location-page .home-content {
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+  padding-bottom: 20px;
+}
+
+.location-page .home-content h5 {
+  margin-bottom: 1rem;
+}
+
+.location-page .home-content h1 {
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.location-page .home-content .text-muted {
+  margin-bottom: 2rem;
+  overflow: visible !important;
+}
+
+/* Button section */
+.location-page .button-part {
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Hero Images - Proper sizing and visibility */
+.location-page .home-img {
+  overflow: visible !important;
+  position: relative;
+  z-index: 2;
+  padding: 20px 0;
+}
+
+.location-page .phone {
+  width: 280px !important;
+  height: auto !important;
+  border: 5px solid #1a1a1a !important;
+  border-radius: 40px !important;
+  padding: 15px 10px !important;
+  background: #1a1a1a !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+}
+
+.location-page .phone::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 15px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 100px !important;
+  height: 25px !important;
+  background: #1a1a1a !important;
+  border-radius: 0 0 20px 20px !important;
+  z-index: 10 !important;
+}
+
+.location-page .screen-slider {
+  border-radius: 30px !important;
+  overflow: hidden !important;
+  height: 580px !important;
+  position: relative !important;
+  background: transparent !important;
+}
+
+.location-page .swiper-wrapper {
+  height: 580px !important;
+  position: relative !important;
+  width: 100% !important;
+  z-index: 1 !important;
+  display: flex !important;
+  transition-property: transform !important;
+  box-sizing: content-box !important;
+}
+
+.location-page .swiper-slide {
+  height: 580px !important;
+  flex-shrink: 0 !important;
+  width: 100% !important;
+  position: relative !important;
+  transition-property: transform !important;
+}
+
+.location-page .screen-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: 28px !important;
+}
+
+/* Car image positioning */
+.location-page .car1 {
+  position: absolute !important;
+  bottom: -50px !important;
+  left: 0 !important;
+  width: 100% !important;
+  max-width: 50px !important;
+  z-index: 1 !important;
+  opacity: 0.9 !important;
+}
+
+/* Content Section - Ensure no cutting */
+.location-page .content-section {
+  overflow: visible !important;
+  padding-top: 60px !important;
+  padding-bottom: 60px !important;
+  background: white !important;
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+.location-page .content-section .container {
+  overflow: visible !important;
+}
+
+.location-page .content-section h2 {
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+.location-page .content-section p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.location-page .content-section .lead {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+/* HTML content from API */
+.location-page .content-section div {
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 991px) {
+  .location-page .home-wrapper {
+    min-height: auto !important;
+    padding-bottom: 30px !important;
+  }
+
+  .location-page .home-img {
+    display: none !important;
+  }
+
+  .location-page .car1 {
+    display: none !important;
+  }
+
+  .location-page .home-content {
+    padding-bottom: 0;
+    text-align: center;
+  }
+
+  .location-page .button-part {
+    justify-content: center !important;
+    flex-direction: column;
+    align-items: center !important;
+  }
+
+  .location-page .button-part h6 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .location-page .button-part a {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .location-page .content-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .location-page .home-content h1 {
+    font-size: 1.75rem;
+  }
+
+  .location-page .home-content h5 {
+    font-size: 1rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+  .location-page .home-content h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Loading and Error States */
+.location-page .spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* Icon styling in content */
+.location-page .icon-svg {
+  margin: 20px auto;
+  display: block;
+}
+
+/* Ensure sections don't overlap */
+.location-page section {
+  position: relative;
+  clear: both;
+}

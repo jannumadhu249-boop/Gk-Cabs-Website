@@ -9,14 +9,12 @@ import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import RefundPolicy from './pages/RefundPolicy';
 import TermsConditions from './pages/TermsConditions';
-import Telangana from './pages/States/Telangana';
-import Hyderabad from './pages/Districts/Hyderbad';
-import Warangal from './pages/Cities/Warangal';
 import LocationPage from './pages/LocationPage';
 
 import Safety from './pages/Safety';
 import Careers from './pages/Careers';
 import Media from './pages/Media';
+import MobileAppSchema from './components/MobileAppSchema';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -32,6 +30,7 @@ function ScrollToTop() {
 function AppLayout() {
   return (
     <>
+      <MobileAppSchema />
       <ScrollToTop />
       <Navbar />
       <Routes>

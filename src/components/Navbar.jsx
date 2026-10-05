@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Icon from './Icon';
-import { API_ENDPOINTS, BASE_URL } from '../config/api';
+import { API_ENDPOINTS } from '../config/api';
 
 
 function Navbar() {
@@ -20,8 +20,8 @@ function Navbar() {
           headers: { 'Content-Type': 'application/json' },
         });
         const data = await response.json();
-        if (data.success && data.contactus?.phoneTwo) {
-          setPhoneNumber(data.contactus.phoneTwo);
+        if (data.success && data.contactus?.phoneOne) {
+          setPhoneNumber(data.contactus.phoneOne);
         } else {
           setPhoneNumber('');
         }
@@ -63,8 +63,8 @@ function Navbar() {
 
           {/* Contact number and Get App button - aligned right */}
           <div className="d-flex align-items-center ms-auto order-xl-2">
-             Contact:&nbsp;
             <a href={`tel:+91${phoneNumber}`} className="contact-number me-3 text-decoration-none">
+              <Icon name="phone" size={20} />
               <span className="highlight-number">
                 {loading ? 'Loading...' : `+91 ${formattedPhone}`}
               </span>

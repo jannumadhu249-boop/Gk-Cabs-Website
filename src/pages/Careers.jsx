@@ -1,9 +1,11 @@
 import './Careers.css';
 import Icon from '../components/Icon';
+import MobileAppSchema from '../components/MobileAppSchema';
 
 const Careers = () => {
   return (
     <div className="careers-page">
+      <MobileAppSchema />
       {/* Hero Section */}
       <section className="careers-hero py-5">
         <div className="container">

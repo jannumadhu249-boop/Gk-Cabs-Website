@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { API_ENDPOINTS, BASE_URL } from '../config/api';
+import MobileAppSchema from '../components/MobileAppSchema';
+import { API_ENDPOINTS } from '../config/api';
 
 function RefundPolicy() {
   const [pageData, setPageData] = useState(null);
@@ -61,14 +62,12 @@ function RefundPolicy() {
     );
   }
 
-  const heroImage = pageData?.homepageImage
-    ? `${BASE_URL}${pageData.homepageImage}`
-    : null;
   const policyText = pageData?.policies?.refundPolicy || '';
   const policyHtml = policyText.replace(/\n/g, '<br>');
 
   return (
     <>
+      <MobileAppSchema />
       {/* Hero Section */}
       <section className="contact-hero">
         <div className="container" data-aos="fade-up">

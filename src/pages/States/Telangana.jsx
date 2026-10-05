@@ -1,16 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../../components/Icon';
-
-const routes = [
-  'Telangana', 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar',
-  'Chandigarh', 'Chhattisgarh', 'Goa', 'Gujarat', 'Jharkhand',
-  'Karnataka', 'Rajasthan', 'Tamil Nadu', 'Uttar Pradesh',
-  'Jammu & Kashmir', 'Puducherry', 'Delhi', 'Haryana', 'Himachal Pradesh',
-  'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya',
-  'Mizoram', 'Nagaland', 'Odisha', 'Punjab', 'Sikkim', 'Tripura',
-  'Uttarakhand', 'West Bengal',
-];
+import MobileAppSchema from '../../components/MobileAppSchema';
 
 const popularDistrictsInTelangana = [
   'Hyderabad', 'Ranga Reddy', 'Karimnagar', 'Warangal', 'Khammam',
@@ -46,10 +37,9 @@ function Telangana() {
     });
   }, []);
 
-  const cardColors = ['#FFF5F5', '#F5FAFF', '#FFFBF0', '#F5FFF5', '#FCF5FF', '#FFFFF0'];
-
   return (
     <div className="state-page-wrapper">
+      <MobileAppSchema />
       {/* ── Breadcrumb Section ── */}
       <section className="contact-hero">
         <div className="container" data-aos="fade-up">

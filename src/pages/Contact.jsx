@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../components/Icon';
+import MobileAppSchema from '../components/MobileAppSchema';
 import { API_ENDPOINTS, BASE_URL } from '../config/api';
 
 function Contact() {
@@ -123,6 +124,7 @@ function Contact() {
 
   return (
     <>
+      <MobileAppSchema />
       {/* Hero with dynamic background */}
       <section
         className="contact-hero"

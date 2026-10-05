@@ -72,6 +72,7 @@
 
 import { useState, useEffect } from 'react';
 import './Media.css';
+import MobileAppSchema from '../components/MobileAppSchema';
 import { API_ENDPOINTS, BASE_URL } from '../config/api';
 
 const Media = () => {
@@ -164,6 +165,7 @@ const Media = () => {
 
   return (
     <div className="media-page">
+      <MobileAppSchema />
       {/* Header Section */}
       <section className="media-header py-5 bg-dark text-white text-center">
         <div className="container">

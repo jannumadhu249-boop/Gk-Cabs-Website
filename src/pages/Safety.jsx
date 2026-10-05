@@ -282,6 +282,7 @@
 
 import { useState, useEffect } from 'react';
 import Icon from '../components/Icon';
+import MobileAppSchema from '../components/MobileAppSchema';
 import './Safety.css';
 import { API_ENDPOINTS, BASE_URL } from '../config/api';
 
@@ -712,6 +713,7 @@ const Safety = () => {
 
     return (
         <div className="safety-page pb-5">
+            <MobileAppSchema />
             <div className="safety-nav py-3 mb-5 sticky-top bg-white">
                 <div className="container">
                     <div className="d-flex justify-content-center gap-4">

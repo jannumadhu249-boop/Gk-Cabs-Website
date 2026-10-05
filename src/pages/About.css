@@ -1,0 +1,231 @@
+/* Hero section specific styles */
+.about-hero-section.home-wrapper {
+  height: auto !important;
+  min-height: 700px !important;
+  overflow: visible !important;
+  padding-top: 60px !important;
+  padding-bottom: 80px !important;
+}
+
+.about-hero-section .home-content {
+  height: auto !important;
+  z-index: 2;
+  position: relative;
+}
+
+.about-hero-section .home-img {
+  z-index: 2;
+  position: relative;
+}
+
+.about-hero-section .phone {
+  width: 280px !important;
+  height: auto !important;
+  min-height: 550px !important;
+  background: #1a1a1a !important;
+  border: 5px solid #1a1a1a !important;
+  border-radius: 35px !important;
+  padding: 5px !important;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25) !important;
+}
+
+.about-hero-section .phone::before {
+  width: 100px !important;
+  height: 20px !important;
+  background: #1a1a1a !important;
+}
+
+.about-hero-section .screen-slider {
+  border-radius: 30px !important;
+  overflow: hidden !important;
+  background: #fff !important;
+  height: 100% !important;
+}
+
+.about-hero-section .screen-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  background: #fff !important;
+}
+
+.about-hero-section .car1 {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  z-index: 0;
+  max-width: 200px;
+}
+
+/* Mobile specific fixes */
+@media (max-width: 991px) {
+  .about-hero-section.home-wrapper {
+    height: auto !important;
+    min-height: auto !important;
+    padding-bottom: 40px !important;
+  }
+  
+  .about-hero-section .home-img {
+    display: none !important;
+  }
+  
+  .about-hero-section .phone {
+    display: none !important;
+  }
+  
+  .about-hero-section .row {
+    margin: 0;
+  }
+  
+  .about-hero-section .col-xl-6 {
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .about-hero-section.home-wrapper {
+    padding-top: 40px !important;
+    padding-bottom: 30px !important;
+  }
+  
+  .about-hero-section .home-content h1 {
+    font-size: 1.75rem !important;
+  }
+  
+  .about-hero-section .home-content h5 {
+    font-size: 1rem !important;
+  }
+}
+
+/* Content styles - NEVER cut content */
+.about-content {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  position: relative;
+  z-index: 2;
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+}
+
+/* Responsive padding for content */
+@media (min-width: 768px) {
+  .about-content {
+    padding: 3rem !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .about-content {
+    padding: 4rem !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .about-content {
+    padding: 5rem !important;
+  }
+}
+
+.about-content ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+}
+
+.about-content ul li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  line-height: 1.8;
+}
+
+.about-content ul li::before {
+  content: '✔';
+  position: absolute;
+  left: 0;
+  color: #f68e1f;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.about-content h1, .about-content h2, .about-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 1.2rem;
+  color: #174897;
+  font-weight: 700;
+}
+
+.about-content h1 {
+  font-size: 2.5rem;
+}
+
+.about-content h2 {
+  font-size: 2rem;
+}
+
+.about-content h3 {
+  font-size: 1.75rem;
+}
+
+.about-content h4, .about-content h5 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.about-content p {
+  margin-bottom: 1.2rem;
+  line-height: 1.8;
+  color: #555;
+  font-size: 16px;
+}
+
+.about-content strong {
+  color: #174897;
+  font-weight: 600;
+}
+
+.about-content a {
+  color: #f68e1f;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.about-content a:hover {
+  color: #174897;
+  text-decoration: underline;
+}
+
+/* Ensure proper section separation - NEVER overlap */
+.content-section {
+  min-height: fit-content !important;
+  height: auto !important;
+  overflow: visible !important;
+  max-height: none !important;
+}
+
+.content-section .container {
+  overflow: visible !important;
+  max-height: none !important;
+}
+
+/* Mobile content adjustments */
+@media (max-width: 768px) {
+  .about-content h1 {
+    font-size: 2rem;
+  }
+  
+  .about-content h2 {
+    font-size: 1.75rem;
+  }
+  
+  .about-content h3 {
+    font-size: 1.5rem;
+  }
+  
+  .about-content {
+    padding: 1.5rem !important;
+  }
+}

@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../components/Icon';
+import MobileAppSchema from '../components/MobileAppSchema';
 import { API_ENDPOINTS, BASE_URL } from '../config/api';
 
 function Home() {
@@ -10,10 +11,18 @@ function Home() {
   const imageBaseUrl = BASE_URL;
 
   useEffect(() => {
+    // Set a timeout for the API call
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
     fetch(API_ENDPOINTS.HOME_SCREEN, {
-      method: 'POST'
+      method: 'POST',
+      signal: controller.signal
     })
-      .then(res => res.json())
+      .then(res => {
+        clearTimeout(timeoutId);
+        return res.json();
+      })
       .then(json => {
         if (json.success) {
           setHomeData(json);
@@ -21,14 +30,20 @@ function Home() {
         setLoading(false);
       })
       .catch(err => {
+        clearTimeout(timeoutId);
         console.error('Error fetching home data:', err);
         setLoading(false);
       });
+
+    return () => {
+      clearTimeout(timeoutId);
+      controller.abort();
+    };
   }, []);
 
   useEffect(() => {
     if (homeData) {
-      document.title = homepage?.mainName || "Gk Cabs - Premium Taxi Booking Solution";
+      document.title = homeData.homepage?.mainName || "Gk Cabs - Premium Taxi Booking Solution";
       
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
@@ -40,29 +55,32 @@ function Home() {
         metaKeywords.setAttribute('content', "Gk Cabs, taxi booking, Hyderabad cabs, car rental, airport taxi");
       }
 
-      // Small timeout to ensure DOM is fully ready
+      // Initialize sliders only after a small delay
       const timer = setTimeout(() => {
         // Testimonial Slider
-        new window.Swiper('#testimonialSlider', {
-          slidesPerView: 1,
-          spaceBetween: 30,
-          loop: true,
-          speed: 1500,
-          autoplay: {
-            delay: 4000,
-            disableOnInteraction: false,
-          },
-          breakpoints: {
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          },
-        });
+        if (document.querySelector('#testimonialSlider')) {
+          new window.Swiper('#testimonialSlider', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            speed: 1500,
+            autoplay: {
+              delay: 4000,
+              disableOnInteraction: false,
+            },
+            breakpoints: {
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            },
+          });
+        }
 
         // App Screenshot Sliders (Inside Phones)
         const heroSwiperConfig = {
           slidesPerView: 1,
           loop: true,
           autoplay: { delay: 2000, disableOnInteraction: false },
+          lazy: true,
         };
 
         if (document.querySelector('#heroUserSlider')) {
@@ -78,6 +96,7 @@ function Home() {
           spaceBetween: 15,
           loop: true,
           autoplay: { delay: 2500, disableOnInteraction: false },
+          lazy: true,
           breakpoints: {
             576: { slidesPerView: 3 },
             991: { slidesPerView: 4 },
@@ -91,7 +110,7 @@ function Home() {
         if (document.querySelector('#driverSlider')) {
           new window.Swiper('#driverSlider', featSwiperConfig);
         }
-      }, 300);
+      }, 100);
 
       return () => clearTimeout(timer);
     }
@@ -99,22 +118,23 @@ function Home() {
 
   const cardColors = ['#FFF5F5', '#F5FAFF', '#FFFBF0', '#F5FFF5', '#FCF5FF', '#FFFFF0'];
 
-  if (loading) {
+  // Show loading while fetching or if data hasn't loaded yet
+  if (loading || !homeData) {
     return (
-      <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-        <div className="spinner-border text-primary" role="status">
+      <div className="d-flex flex-column justify-content-center align-items-center" style={{ height: '100vh' }}>
+        <div className="spinner-border text-primary mb-3" role="status" style={{ width: '3rem', height: '3rem' }}>
           <span className="visually-hidden">Loading...</span>
         </div>
+        <p className="text-muted">Loading Gk Cabs...</p>
       </div>
     );
   }
 
-  if (!homeData) return null;
-
   const { homepage, states, districts, cities, testimonials, faqs, whychooseus, servicecategorys, contactus } = homeData;
 
   return (
-    <div className="home-page-container overflow-hidden">
+    <div className="home-page-container">
+      <MobileAppSchema />
       {/* ── Hero Section ── */}
       <section className="home-wrapper" id="home">
         <div className="container">
@@ -142,7 +162,12 @@ function Home() {
                     <div className="swiper-wrapper">
                       {homepage.userAppImages?.map((img, i) => (
                         <div className="swiper-slide" key={i}>
-                          <img src={`${imageBaseUrl}${img}`} className="screen-img" alt="User App" />
+                          <img 
+                            src={`${imageBaseUrl}${img}`} 
+                            className="screen-img" 
+                            alt="User App"
+                            loading="lazy"
+                          />
                         </div>
                       ))}
                     </div>
@@ -155,7 +180,12 @@ function Home() {
                     <div className="swiper-wrapper">
                       {homepage.driverAppImages?.map((img, i) => (
                         <div className="swiper-slide" key={i}>
-                          <img src={`${imageBaseUrl}${img}`} className="screen-img" alt="Driver App" />
+                          <img 
+                            src={`${imageBaseUrl}${img}`} 
+                            className="screen-img" 
+                            alt="Driver App"
+                            loading="lazy"
+                          />
                         </div>
                       ))}
                     </div>
@@ -169,12 +199,18 @@ function Home() {
       </section>
 
       {/* ── Banner Image (Middle) ── */}
-      <div className="app-banner-container overflow-hidden w-100 bg-white">
-        <img className="img-fluid app-banner" src={homepage.bannerImage ? `${imageBaseUrl}${homepage.bannerImage}` : "assets/images/app-banner.png"} alt="Banner" style={{ width: '100%', objectFit: 'cover' }} />
+      <div className="app-banner-container w-100 bg-white">
+        <img 
+          className="img-fluid app-banner" 
+          src={homepage.bannerImage ? `${imageBaseUrl}${homepage.bannerImage}` : "assets/images/app-banner.png"} 
+          alt="Banner" 
+          style={{ width: '100%', objectFit: 'cover' }}
+          loading="lazy"
+        />
       </div>
 
       {/* ── Application Showcase Sections ── */}
-      <section className="application-wrapper section-b-space overflow-hidden py-5">
+      <section className="application-wrapper section-b-space py-5" style={{ position: 'relative', zIndex: 1 }}>
         <div className="container">
           {homepage.section && homepage.section.map((sec, i) => (
             <div key={i} className={`row align-items-center g-4 ${i !== 0 ? 'mt-5' : ''}`}>
@@ -186,14 +222,20 @@ function Home() {
               </div>
               <div className={`col-md-6 offset-md-1 d-flex align-items-center justify-content-center ${i % 2 !== 0 ? 'order-md-1' : 'order-md-2 order-1'}`}>
                 <div className="application-img">
-                  <img className="img-fluid app-img" src={`${imageBaseUrl}${sec.image}`} alt={sec.name} />
+                  <img 
+                    className="img-fluid app-img" 
+                    src={`${imageBaseUrl}${sec.image}`} 
+                    alt={sec.name} 
+                    style={{ maxWidth: '100%', height: 'auto' }}
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <img className="img-fluid effect1" src="assets/images/effect.png" alt="effect" />
-        <img className="img-fluid effect2" src="assets/images/effect.png" alt="effect" />
+        <img className="img-fluid effect1" src="assets/images/effect.png" alt="effect" style={{ position: 'absolute', zIndex: -1 }} />
+        <img className="img-fluid effect2" src="assets/images/effect.png" alt="effect" style={{ position: 'absolute', zIndex: -1 }} />
       </section>
 
       {/* ── Services Section ── */}
@@ -209,7 +251,12 @@ function Home() {
                 <div className="service-card p-4 rounded-4 h-100 text-center border-0 shadow-sm bg-white">
                   <div className="service-icon mb-4 mx-auto d-flex align-items-center justify-content-center bg-primary bg-opacity-10 rounded-circle" style={{ width: '80px', height: '80px' }}>
                     {service.image ? (
-                      <img src={`${imageBaseUrl}${service.image}`} alt={service.name} style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
+                      <img 
+                        src={`${imageBaseUrl}${service.image}`} 
+                        alt={service.name} 
+                        style={{ width: '50px', height: '50px', objectFit: 'cover' }}
+                        loading="lazy"
+                      />
                     ) : (
                       <Icon name="car" size={35} className="text-primary" />
                     )}
@@ -243,6 +290,7 @@ function Home() {
                           src={`${imageBaseUrl}${feature.image}`}
                           alt={feature.name}
                           style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                          loading="lazy"
                         />
                       ) : (
                         <Icon name="star" size={24} className="text-primary" />
@@ -259,7 +307,7 @@ function Home() {
       </section>
 
       {/* ── App Interfaces Section ── */}
-      <section className="screenshots-section section-b-space overflow-hidden py-5">
+      <section className="screenshots-section section-b-space py-5" style={{ position: 'relative', zIndex: 1 }}>
         <div className="container">
           <div className="title text-center mb-5">
             <h3>Gk Cabs App Interfaces</h3>
@@ -267,7 +315,7 @@ function Home() {
                Simple, clean, and efficient navigation for a seamless experience.</p>
           </div>
 
-          <ul className="nav nav-pills screenshots-tab mb-5" role="tablist">
+          <ul className="nav nav-pills screenshots-tab mb-5 justify-content-center" role="tablist">
             <li className="nav-item">
               <button className={`nav-link px-4 ${activeTab === 'user' ? 'active' : ''}`} onClick={() => setActiveTab('user')}>User App</button>
             </li>
@@ -282,7 +330,13 @@ function Home() {
                 <div className="swiper-wrapper">
                   {homepage.userAppImages?.map((img, i) => (
                     <div key={i} className="swiper-slide text-center p-2">
-                      <img src={`${imageBaseUrl}${img}`} className="img-fluid rounded-4 shadow-sm" alt="User App Screen" style={{ maxHeight: '450px' }} />
+                      <img 
+                        src={`${imageBaseUrl}${img}`} 
+                        className="img-fluid rounded-4 shadow-sm" 
+                        alt="User App Screen" 
+                        style={{ maxHeight: '450px', objectFit: 'contain' }}
+                        loading="lazy"
+                      />
                     </div>
                   ))}
                 </div>
@@ -293,7 +347,13 @@ function Home() {
                 <div className="swiper-wrapper">
                   {homepage.driverAppImages?.map((img, i) => (
                     <div key={i} className="swiper-slide text-center p-2">
-                      <img src={`${imageBaseUrl}${img}`} className="img-fluid rounded-4 shadow-sm" alt="Driver App Screen" style={{ maxHeight: '450px' }} />
+                      <img 
+                        src={`${imageBaseUrl}${img}`} 
+                        className="img-fluid rounded-4 shadow-sm" 
+                        alt="Driver App Screen" 
+                        style={{ maxHeight: '450px', objectFit: 'contain' }}
+                        loading="lazy"
+                      />
                     </div>
                   ))}
                 </div>
@@ -301,24 +361,29 @@ function Home() {
             </div>
           </div>
         </div>
-        <img className="img-fluid effect3" src="assets/images/effect.png" alt="effect" />
-        <img className="img-fluid effect4" src="assets/images/effect.png" alt="effect" />
+        <img className="img-fluid effect3" src="assets/images/effect.png" alt="effect" style={{ position: 'absolute', zIndex: -1 }} />
+        <img className="img-fluid effect4" src="assets/images/effect.png" alt="effect" style={{ position: 'absolute', zIndex: -1 }} />
       </section>
 
-      {/* ── Inner Pages Section (Missing App Image Section) ── */}
-      <section id="inner-page" className="inner-page-wrapper section-b-space py-5">
+      {/* ── Inner Pages Section ── */}
+      {/* <section id="inner-page" className="inner-page-wrapper section-b-space py-5">
         <div className="container">
-          <div className="title text-center mb-0">
+          <div className="title text-center mb-4">
             <h3>Gk Cabs App Inner Pages</h3>
             <p>Explore the comprehensive set of features that make Gk Cabs the ultimate choice for your
               journey. From intuitive booking to detailed ride history, every screen is designed for your
               convenience.</p>
           </div>
         </div>
-        <div className="text-center mt-4">
-          <img className="img-fluid inner-page-img" src="assets/images/user-app-multi-img.png" alt="inner-pages" style={{ width: '100%' }} />
+        <div className="text-center mt-4 px-3">
+          <img 
+            className="img-fluid inner-page-img" 
+            src="assets/images/user-app-multi-img.png"
+            alt="inner-pages" 
+            style={{ width: '100%', maxWidth: '100%', height: 'auto' }} 
+          />
         </div>
-      </section>
+      </section> */}
 
       {/* ── Popular Routes Sections ── */}
       <section id="routes" className="route-section section-b-space bg-light">
@@ -392,13 +457,13 @@ function Home() {
       </section>
 
       {/* ── Testimonials Section ── */}
-      <section id="testimonials" className="testimonials-section section-b-space py-5 overflow-hidden">
+      <section id="testimonials" className="testimonials-section section-b-space py-5">
         <div className="container">
           <div className="title text-center mb-5">
             <h3>Client Testimonials</h3>
             <p>What our travelers say about Gk Cabs experience.</p>
           </div>
-          <div className="swiper overflow-visible" id="testimonialSlider">
+          <div className="swiper" id="testimonialSlider" style={{ overflow: 'visible' }}>
             <div className="swiper-wrapper">
               {testimonials.map((testimonial, i) => (
                 <div key={i} className="swiper-slide h-auto">
@@ -406,7 +471,13 @@ function Home() {
                     <div className="d-flex align-items-center mb-3">
                       <div className="testimonial-avatar me-3 shadow-sm overflow-hidden rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style={{ width: '55px', height: '55px' }}>
                         {testimonial.image ? (
-                          <img src={`${imageBaseUrl}${testimonial.image}`} alt={testimonial.name} className="img-fluid w-100 h-100" style={{ objectFit: 'cover' }} />
+                          <img 
+                            src={`${imageBaseUrl}${testimonial.image}`} 
+                            alt={testimonial.name} 
+                            className="img-fluid w-100 h-100" 
+                            style={{ objectFit: 'cover' }}
+                            loading="lazy"
+                          />
                         ) : (
                           <h5 className="mb-0">{testimonial.name.charAt(0)}</h5>
                         )}
