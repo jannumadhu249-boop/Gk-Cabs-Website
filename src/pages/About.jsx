@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import MobileAppSchema from '../components/MobileAppSchema';
 import { API_ENDPOINTS, BASE_URL } from '../config/api';

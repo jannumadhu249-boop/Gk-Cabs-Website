@@ -64,7 +64,9 @@ function Navbar() {
           {/* Contact number and Get App button - aligned right */}
           <div className="d-flex align-items-center ms-auto order-xl-2">
             <a href={`tel:+91${phoneNumber}`} className="contact-number me-3 text-decoration-none">
-              <Icon name="phone" size={20} />
+              {/* <Icon name="phone" size={20} /> */}
+              <img className='img-phn' 
+                src="assets/images/phone-call.png" alt="Phone Icon" style={{width:"20px"}}/>
               <span className="highlight-number">
                 {loading ? 'Loading...' : `+91 ${formattedPhone}`}
               </span>
