@@ -1,11 +1,11 @@
 // import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import MobileAppSchema from '../components/MobileAppSchema';
-import { API_ENDPOINTS, BASE_URL } from '../config/api';
+import { API_ENDPOINTS, base_url, getHomeScreenData, getCachedHomeData } from '../config/api';
 import './About.css';
 
 function About() {
-  const [homeData, setHomeData] = useState(null);
+  const [homeData, setHomeData] = useState(getCachedHomeData);
   const [aboutUs, setAboutUs] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,28 +13,17 @@ function About() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000);
-
-        const [aboutRes, homeRes] = await Promise.all([
+        const [aboutRes, homeJson] = await Promise.all([
           fetch(API_ENDPOINTS.ABOUT_US, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            signal: controller.signal
           }),
-          fetch(API_ENDPOINTS.HOME_SCREEN, {
-            method: 'POST',
-            signal: controller.signal
-          })
+          getHomeScreenData()
         ]);
 
-        clearTimeout(timeoutId);
-
         if (!aboutRes.ok) throw new Error(`About API error: ${aboutRes.status}`);
-        if (!homeRes.ok) throw new Error(`Home API error: ${homeRes.status}`);
 
         const aboutJson = await aboutRes.json();
-        const homeJson = await homeRes.json();
 
         if (aboutJson.success) {
           setAboutUs(aboutJson.aboutus);
@@ -42,7 +31,7 @@ function About() {
           throw new Error(aboutJson.message || 'Failed to load about data');
         }
 
-        if (homeJson.success) {
+        if (homeJson && homeJson.success) {
           setHomeData(homeJson);
         }
 
@@ -101,7 +90,7 @@ function About() {
         <div className="spinner-border text-primary mb-3" role="status" style={{ width: '3rem', height: '3rem' }}>
           <span className="visually-hidden">Loading...</span>
         </div>
-        <p className="text-muted">Loading About Us...</p>
+        <p className="text-muted">Loading...</p>
       </div>
     );
   }
@@ -125,7 +114,7 @@ function About() {
   }
 
   const { homepage, contactus } = homeData || {};
-  const imageBaseUrl = BASE_URL;
+  const imageBaseUrl = base_url;
 
   return (
     <>

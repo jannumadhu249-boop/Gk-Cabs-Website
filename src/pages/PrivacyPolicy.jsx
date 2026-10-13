@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import MobileAppSchema from '../components/MobileAppSchema';
-import { API_ENDPOINTS } from '../config/api';
+import { getHomeScreenData } from '../config/api';
 
 function PrivacyPolicy() {
   const [pageData, setPageData] = useState(null);
@@ -11,19 +11,14 @@ function PrivacyPolicy() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(API_ENDPOINTS.HOME_SCREEN, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-        });
-        if (!res.ok) throw new Error(`Server error: ${res.status}`);
-        const data = await res.json();
-        if (data.success) {
+        const data = await getHomeScreenData();
+        if (data && data.success) {
           setPageData({
             policies: data.policies,
             homepageImage: data.homepage?.mainImage || data.homepage?.bannerImage
           });
         } else {
-          throw new Error(data.message || 'Failed to load');
+          throw new Error(data?.message || 'Failed to load');
         }
       } catch (err) {
         setError(err.message);

@@ -2,43 +2,23 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../components/Icon';
 import MobileAppSchema from '../components/MobileAppSchema';
-import { API_ENDPOINTS, BASE_URL } from '../config/api';
+import { API_ENDPOINTS, getHomeScreenData, getCachedHomeData } from '../config/api';
 
 function Home() {
-  const [homeData, setHomeData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [homeData, setHomeData] = useState(getCachedHomeData);
   const [activeTab, setActiveTab] = useState('user');
-  const imageBaseUrl = BASE_URL;
+  const imageBaseUrl = API_ENDPOINTS.ImageUrl;
 
   useEffect(() => {
-    // Set a timeout for the API call
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-
-    fetch(API_ENDPOINTS.HOME_SCREEN, {
-      method: 'POST',
-      signal: controller.signal
-    })
-      .then(res => {
-        clearTimeout(timeoutId);
-        return res.json();
-      })
+    getHomeScreenData()
       .then(json => {
-        if (json.success) {
+        if (json && json.success) {
           setHomeData(json);
         }
-        setLoading(false);
       })
       .catch(err => {
-        clearTimeout(timeoutId);
         console.error('Error fetching home data:', err);
-        setLoading(false);
       });
-
-    return () => {
-      clearTimeout(timeoutId);
-      controller.abort();
-    };
   }, []);
 
   useEffect(() => {
@@ -118,19 +98,28 @@ function Home() {
 
   const cardColors = ['#FFF5F5', '#F5FAFF', '#FFFBF0', '#F5FFF5', '#FCF5FF', '#FFFFF0'];
 
-  // Show loading while fetching or if data hasn't loaded yet
-  if (loading || !homeData) {
+  if (!homeData) {
     return (
-      <div className="d-flex flex-column justify-content-center align-items-center" style={{ height: '100vh' }}>
+      <div className="d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '60vh' }}>
         <div className="spinner-border text-primary mb-3" role="status" style={{ width: '3rem', height: '3rem' }}>
           <span className="visually-hidden">Loading...</span>
         </div>
-        <p className="text-muted">Loading Gk Cabs...</p>
+        <p className="text-muted">Loading...</p>
       </div>
     );
   }
 
-  const { homepage, states, districts, cities, testimonials, faqs, whychooseus, servicecategorys, contactus } = homeData;
+  const {
+    homepage = {},
+    states = [],
+    districts = [],
+    cities = [],
+    testimonials = [],
+    faqs = [],
+    whychooseus = [],
+    servicecategorys = [],
+    contactus = {}
+  } = homeData;
 
   return (
     <div className="home-page-container">
@@ -254,7 +243,7 @@ function Home() {
                       <img 
                         src={`${imageBaseUrl}${service.image}`} 
                         alt={service.name} 
-                        style={{ width: '50px', height: '50px', objectFit: 'cover' }}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
                         loading="lazy"
                       />
                     ) : (

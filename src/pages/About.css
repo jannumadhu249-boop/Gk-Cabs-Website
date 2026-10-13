@@ -19,10 +19,10 @@
 }
 
 .about-hero-section .phone {
-  width: 280px !important;
-  height: auto !important;
+  width: 280px;
+  height: auto;
   min-height: 550px !important;
-  background: #1a1a1a !important;
+  /* background: #1a1a1a; */
   border: 5px solid #1a1a1a !important;
   border-radius: 35px !important;
   padding: 5px !important;

@@ -53,15 +53,15 @@
 }
 
 .location-page .phone {
-  width: 280px !important;
-  height: auto !important;
-  border: 5px solid #1a1a1a !important;
-  border-radius: 40px !important;
+  width: 300px !important;
+  height: 550px;
+  /* border: 2px solid #1a1a1a !important; */
+  border-radius: 40px;
   padding: 15px 10px !important;
-  background: #1a1a1a !important;
+  /* background: #1a1a1a !important; */
   position: relative !important;
   overflow: hidden !important;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+  /* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important; */
 }
 
 .location-page .phone::before {
@@ -72,7 +72,7 @@
   transform: translateX(-50%) !important;
   width: 100px !important;
   height: 25px !important;
-  background: #1a1a1a !important;
+  /* background: #1a1a1a !important; */
   border-radius: 0 0 20px 20px !important;
   z-index: 10 !important;
 }

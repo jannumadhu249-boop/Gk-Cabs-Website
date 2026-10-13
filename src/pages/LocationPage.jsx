@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Icon from '../components/Icon';
 import MobileAppSchema from '../components/MobileAppSchema';
-import { API_ENDPOINTS, BASE_URL } from '../config/api';
+import { BASE_URL, getHomeScreenData, getCachedHomeData } from '../config/api';
 import './LocationPage.css';
 
 function LocationPage({ type: propType, slugOverride }) {
@@ -13,27 +13,43 @@ function LocationPage({ type: propType, slugOverride }) {
   // Determine type: from props, or from URL path (state, district, city)
   const type = propType;
 
-  const [homeData, setHomeData] = useState(null);
-  const [location, setLocation] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [homeData, setHomeData] = useState(getCachedHomeData);
+  const [location, setLocation] = useState(() => {
+    const cached = getCachedHomeData();
+    if (cached) {
+      const allLocations = [
+        ...(cached.states || []),
+        ...(cached.districts || []),
+        ...(cached.cities || []),
+      ];
+      return allLocations.find(item => item.slug === slug) || null;
+    }
+    return null;
+  });
+  const [loading, setLoading] = useState(() => {
+    const cached = getCachedHomeData();
+    if (cached) {
+      const allLocations = [
+        ...(cached.states || []),
+        ...(cached.districts || []),
+        ...(cached.cities || []),
+      ];
+      return !allLocations.some(item => item.slug === slug);
+    }
+    return true;
+  });
 
   useEffect(() => {
-    fetch(API_ENDPOINTS.HOME_SCREEN, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({}),
-    })
-      .then(res => res.json())
+    getHomeScreenData()
       .then(data => {
-        if (data.success) {
+        if (data && data.success) {
           setHomeData(data);
- const allLocations = [
-  ...(data.states || []),
-  ...(data.districts || []),
-  ...(data.cities || []),
-];
-
-const found = allLocations.find(item => item.slug === slug);
+          const allLocations = [
+            ...(data.states || []),
+            ...(data.districts || []),
+            ...(data.cities || []),
+          ];
+          const found = allLocations.find(item => item.slug === slug);
           if (found) setLocation(found);
         }
         setLoading(false);
